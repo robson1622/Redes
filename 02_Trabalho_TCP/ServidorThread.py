@@ -119,7 +119,7 @@ def EnviarResposta(socket, resposta, encoding='utf-8'):
         hash_bytes = hash_sha.encode(encoding)
         # TAMANHO_NOME (2 bytes) + NOME + TAMANHO_HASH (2 bytes) + HASH + TAMANHO_DADOS (8 bytes) + DADOS
         pacote = (
-            struct.pack('!H', len(nome_bytes)) +   # 2 bytes: tamanho do nome
+            struct.pack('!H', len(nome_bytes)) +    # 2 bytes: tamanho do nome
             nome_bytes +                            # nome do arquivo
             struct.pack('!H', len(hash_bytes)) +    # 2 bytes: tamanho do hash
             hash_bytes +                            # hash SHA-256

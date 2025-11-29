@@ -1,12 +1,12 @@
 from enum import Enum
 
 
-PORTA_SERVIDOR = 3030
+PORTA_SERVIDOR = 7070
 HOST_PADRAO = 'localhost'
 TAMANHO_QUEUE = 1024
 BUFFER_SIZE = 1024
 ENCODER_FORMACT = 'utf-8'
-MONITOR_OF_THREADS  = False
+MONITOR_OF_THREADS  = True
 MONITOR_OF_SERVER    = True
 class IDENTIFIERS(Enum):
     CLIENTE    = "Cliente"
@@ -83,7 +83,7 @@ class MENSAGE_SERVER_TYPE(Enum):
     MENSAGE_SERVER_TYPE_LIST_THREADS                = "listar threads"
     MENSAGE_SERVER_TYPE_SHOTDOWN                    = "desligar"
     MENSAGE_SERVER_TYPE_CLOSE_THREAD                = "fechar thread" # fechar thread [todos] ou [51234]
-    MENSAGE_SERVER_TYPE_SEND_MENSAGE_CLIENT         = "mensagem" # mensagem "minha mensagem." [51234] ou [todas]
+    MENSAGE_SERVER_TYPE_SEND_MENSAGE_CLIENT         = "msg" # mensagem "minha mensagem." [51234] ou [todas]
     MENSAGE_SERVER_TYPE_CONFIGURE_MONITOR_THREAD    = "monitor threads" # monitor threads [ativar/desativar]
     MENSAGE_SERVER_TYPE_HELP                        = "ajuda"
     MENSAGE_SERVER_TYPE_COMMAND_NOT_FOUND           = "Comando não encontrado : "
@@ -94,6 +94,7 @@ class MENSAGE_CLIENT(Enum):
     MENSAGE_CLIENT_EXIT               = "sair" # sair ou Sair
     MENSAGE_CLIENT_ARCHIVE            = "arquivo" # arquivo [nome.ext] ou Arquivo [nome.ext]
     MENSAGE_CLIENT_MENSAGE            = "chat"   # chat [mensagem em texto] ou Chat [mensagem em texo]
+    MENSAGE_CLIENT_HELP               = "ajuda"  # ajuda ou Ajuda
 
 class Mensage :
     def __init__(self):

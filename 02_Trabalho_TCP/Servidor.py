@@ -41,28 +41,30 @@ class Servidor :
                 # Aceitando uma conexão
                 try:
                     cliente_socket, endereco = self.servidor_socket.accept()
-                    print("\n")
-                    self.print(f" Cliente conectado : {endereco}")
+                    self.print("")
+                    self.print(f"Cliente conectado : {endereco}")
                     self.thread_manager.createThread(cliente_socket=cliente_socket)
                     
                 except socket.timeout:
                     continue
                     
         except KeyboardInterrupt:
-            print("\nServidor encerrado.")
+            self.print("Servidor encerrado.")
         finally:
             self.servidor_socket.close()
             self.print("Finalizado.")
             exit(0)
 
     def inputThread(self):
+        comando = ""
         while (self.wait_input):
-            time.sleep(0.001)
-            comando = input(f"[{IDENTIFIERS.SERVER.value}] >> ")
-            self.action_thread = Thread(target=self.ActionThread,
-                                       args=(comando,),
-                                       name="Action Thread")
-            self.action_thread.start()
+            time.sleep(0.3)
+            if comando != 'desligar':
+                comando = input(f"[{IDENTIFIERS.SERVER.value}] >> ")
+                self.action_thread = Thread(target=self.ActionThread,
+                                        args=(comando,),
+                                        name="Action Thread")
+                self.action_thread.start()
             
     def ActionThread(self,comando : str) -> None:
         if not self.ActionExecute(user_input=comando):
@@ -176,9 +178,9 @@ class Servidor :
 
     def ActionShotdown(self) -> bool:
         try:
+            self.wait_input = False
             self.print(f"Iniciando desligamento do servidor...")
             self.ActionCloseThread(id=-1)
-            self.wait_input = False
             return True
         except Exception as e:
             self.print(f"Erro no desligamento: {e}")
